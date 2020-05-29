@@ -13,16 +13,17 @@ const agendaEl = document.querySelector("#Agenda");
     function renderList(){
         agendaEl.innerHTML = '';
 
+
         Agenda.forEach( 
             function( item, index ){
-                agendaEl.innerHTML += `<div class="row" >
-                <div class="hour" id="${Agenda[index].Hour}" style="width: 10%;">
+                agendaEl.innerHTML += `<div class="row  time-block" >
+                <div class="hour" id="${Agenda[index].Hour}">
                     ${item.Hour}
                 </div>
-                <textarea id="${index}" class="${getTime(item)}" style="width: 80%;">
-                    ${item.Schedule}      
-                </textarea> 
-                <img src="https://lh3.googleusercontent.com/proxy/zJa0pbvzOyZSbroVUgZer7ZWBkqHoMB79VzTVxajhr9nPQWjACWvJlm838dBZa6uYT9A385nBaFscCqfBJp0dqRuA35KPcN6X0Y7uUsP5sUuwNVSWMXKyv-KNNJMrdQTjgP0rw" alt="save button" class="saveBtn" style="width: 10%;" onClick='saveAgenda(event)'/>
+                <textarea id="${index}" class="${getTime(item)}  description"  onfocus="this.select()">${item.Schedule}</textarea> 
+                <div class="saveBtn">
+                    <i class="far fa-save" onClick='saveAgenda(event)'></i>
+                </div>
               </div>`;
             }
         )
@@ -50,11 +51,11 @@ const agendaEl = document.querySelector("#Agenda");
         event.preventDefault();
         let textArea = event.target.parentElement.childNodes[3];
         let idx = textArea.id;
-
+        // save input to Agenda
         Agenda[idx].Schedule = textArea.value;
-        // console.log(textArea.value); document.querySelectorAll('textarea')[0].value
         // save to local storage
         localStorage.Agenda = JSON.stringify(Agenda);
 
         renderList();
     }
+
