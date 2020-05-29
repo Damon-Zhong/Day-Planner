@@ -60,4 +60,4 @@ function saveAgenda(event){
 }
 
     //Show current time when page loaded
-    currentTime.textContent = setInterval(function(){currentTime.textContent=moment();}, 1000);
+    currentTime.textContent = setInterval(function(){currentTime.textContent=moment().format("dddd, MMMM Do YYYY, h:mm:ss a");}, 1000);
